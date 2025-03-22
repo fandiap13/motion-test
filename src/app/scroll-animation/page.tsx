@@ -1,6 +1,6 @@
 "use client";
 
-import { useScroll, motion, useSpring } from "motion/react";
+import { useScroll, motion, useSpring, useTransform } from "motion/react";
 
 const ScrollAnimationPage = () => {
     const { scrollYProgress } = useScroll();
@@ -8,11 +8,18 @@ const ScrollAnimationPage = () => {
     // memberikan efek knyl
     const scaleX = useSpring(scrollYProgress);
 
+    const background = useTransform(scrollYProgress, [0, 0.25, 1], ["rgb(86,1,245)", "rgb(86,100,245)", "rgb(1,245,13)"]);
+
+    console.log({
+        scaleX, background
+    })
+
     return (
         <div>
             <motion.div
                 style={{
                     // scaleX: scrollYProgress
+                    background,
                     scaleX
                 }}
                 className="bg-blue-600 origin-left transform sticky top-0 w-full h-[20px]"
